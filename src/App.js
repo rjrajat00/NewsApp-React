@@ -1,60 +1,72 @@
 
 import './App.css';
 import LoadingBar from 'react-top-loading-bar'
+
 import {
- HashRouter as Router,
+ Navigate,
   Routes,
   Route
-} from "react-router-dom";
+  } from "react-router-dom";
 
 
 
 
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import Navbar from './Components/Navbar';
 import News from './Components/News';
 
-export default class App extends Component {
-  pageSize=9;
+const  App =()=> {
+  const pageSize = 9;
 
-state={
-  progress:0
-}
-setProgress=(progress)=>{
+  const [progress, setProgress]=useState(0)
 
-  this.setState({progress:progress});
-}
+ 
+ 
+  // state = {
+  //   progress: 0
+  // }
 
-  render() {
+
+  // setProgress = (progress) => {
+
+  //   this.setState({ progress: progress });
+  // }
+
+  
     return (
       <div>
-        <Router>
-          
+       
 
-          <Navbar  />
+       
+
+
+          <Navbar />
 
           <LoadingBar
-          height={5}
-        color='#f11946'
-        progress={this.state.progress}
-        
-      />
+            height={5}
+            color='#f11946'
+            progress={progress}
+            
+            />
 
           <Routes>
-           
-            <Route exact path="/home" element={<News setProgress= {this.setProgress} key="home" pageSize={this.pageSize} country="in" category="general" />} />
-            <Route exact path="/business" element={<News setProgress= {this.setProgress} key=" business" pageSize={this.pageSize} country="in" category="business" />} />
-            <Route exact path="/entertainment" element={<News setProgress= {this.setProgress} key="entertain" pageSize={this.pageSize} country="in" category="entertainment" />} />
-            <Route exact path="/health" element={<News setProgress= {this.setProgress} key="health" pageSize={this.pageSize} country="in" category="health" />} />
-            <Route exact path="/science" element={<News setProgress= {this.setProgress} key="science" pageSize={this.pageSize} country="in" category="science" />} />
-            <Route exact path="/sports" element={<News setProgress= {this.setProgress} key="sports" pageSize={this.pageSize} country="in" category="sports" />} />
-            <Route exact path="/tech" element={<News setProgress= {this.setProgress} key="tech" pageSize={this.pageSize} country="in" category="technology" />} />
 
+            <Route exact path="/" element={<News setProgress={setProgress} key="home" pageSize={pageSize} country="in" category="general" />} />
+            <Route exact path="/business" element={<News setProgress={setProgress} key=" business" pageSize={pageSize} country="in" category="business" />} />
+            <Route exact path="/entertainment" element={<News setProgress={setProgress} key="entertain" pageSize={pageSize} country="in" category="entertainment" />} />
+            <Route exact path="/health" element={<News setProgress={setProgress} key="health" pageSize={pageSize} country="in" category="health" />} />
+            <Route exact path="/science" element={<News setProgress={setProgress} key="science" pageSize={pageSize} country="in" category="science" />} />
+            <Route exact path="/sports" element={<News setProgress={setProgress} key="sports" pageSize={pageSize} country="in" category="sports" />} />
+            <Route exact path="/tech" element={<News setProgress={setProgress} key="tech" pageSize={pageSize} country="in" category="technology" />} />
 
+            <Route exact path="/*" element={<Navigate to="/general" />} />
 
           </Routes>
-        </Router>
+        
+            
       </div>
     )
-  }
+  
 }
+
+export default App
